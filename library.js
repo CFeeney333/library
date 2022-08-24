@@ -23,21 +23,27 @@ function addBookToLibrary(author, title, pageCount, isRead) {
   displayBooks();
 }
 
+function removeBookFromLibrary(index) {
+  myLibrary.splice(index, 1);
+  displayBooks();
+}
+
 function displayBooks() {
   while (cardContainer.hasChildNodes()) {
     cardContainer.removeChild(cardContainer.firstChild);
   }
 
   let card = null;
-  for (let book of myLibrary) {
-    card = createCard(book);
+  for (let i = 0; i < myLibrary.length; i++) {
+    card = createCard(myLibrary[i], i);
     cardContainer.appendChild(card);
   }
 }
 
-function createCard(book) {
+function createCard(book, id) {
   const card = document.createElement("div");
   card.classList.add("card");
+  card.dataset.id = id;
 
   const title = document.createElement("h1");
   title.innerHTML = book.title;
@@ -45,10 +51,19 @@ function createCard(book) {
   const author = document.createElement("p");
   author.innerHTML = book.author;
 
+  const removeButton = document.createElement("button");
+  removeButton.innerHTML = "Remove";
+  removeButton.addEventListener("click", onRemoveButtonClick);
+
   card.appendChild(title);
   card.appendChild(author);
+  card.appendChild(removeButton);
 
   return card;
+}
+
+function onRemoveButtonClick(event) {
+  removeBookFromLibrary(event.target.dataset.id);
 }
 
 // for testing purposes
