@@ -20,12 +20,10 @@ Book.prototype.info = function () {
 
 function addBookToLibrary(author, title, pageCount, isRead) {
   myLibrary.push(new Book(author, title, pageCount, isRead));
-  displayBooks();
 }
 
 function removeBookFromLibrary(index) {
   myLibrary.splice(index, 1);
-  displayBooks();
 }
 
 function displayBooks() {
@@ -64,8 +62,10 @@ function createCard(book, id) {
 
 function onRemoveButtonClick(event) {
   removeBookFromLibrary(event.target.dataset.id);
+  displayBooks();
 }
 
 // for testing purposes
 addBookToLibrary("JRR Tolkien", "The Hobbit", 124, true);
 addBookToLibrary("Mark Twain", "Huckleberry Finn", 285, true);
+displayBooks();
