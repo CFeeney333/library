@@ -49,12 +49,12 @@ const narnia = new Book(
   true
 );
 
+const hobbitCopy = new Book("The Hobbit", "Jim Random", 14, false);
+
 addBookToLibrary(theHobbit);
-addBookToLibrary(narnia);
+addBookToLibrary(hobbitCopy);
 displayBooks();
-console.log("Changing read status for the hobbit");
-theHobbit.changeReadStatus(true);
+removeBookFromLibrary("The Hobbit"); // this title will be stored as a data attribute in the html when the book is added to the library
 displayBooks();
-console.log("Changing it back");
-theHobbit.changeReadStatus(false);
+removeBookFromLibrary("The Hobbit");
 displayBooks();
