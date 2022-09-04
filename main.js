@@ -1,15 +1,25 @@
 // global variables
-const myLibrary = [];
+const myLibrary = {};
 
 // global functions
 function addBookToLibrary(book) {
-  myLibrary.push(book);
+  if (!Object.keys(myLibrary).includes(book.title)) {
+    myLibrary[book.title] = book;
+  } else {
+    console.log("Library already contains book " + book.title);
+  }
 }
 
-function removeBookFromLibrary() {}
+function removeBookFromLibrary(title) {
+  if (Object.keys(myLibrary).includes(title)) {
+    delete myLibrary[title];
+  } else {
+    console.log("Library does not contain book " + title);
+  }
+}
 
 function displayBooks() {
-  for (let book of myLibrary) {
+  for (let book of Object.values(myLibrary)) {
     console.log(book.info());
   }
 }
