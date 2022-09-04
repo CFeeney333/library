@@ -40,21 +40,3 @@ Book.prototype.info = function () {
 Book.prototype.changeReadStatus = function (isRead) {
   this.isRead = isRead;
 };
-
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
-const narnia = new Book(
-  "The Lion, The Witch and the Wardrobe",
-  "C.S. Lewis",
-  153,
-  true
-);
-
-const hobbitCopy = new Book("The Hobbit", "Jim Random", 14, false);
-
-addBookToLibrary(theHobbit);
-addBookToLibrary(hobbitCopy);
-displayBooks();
-removeBookFromLibrary("The Hobbit"); // this title will be stored as a data attribute in the html when the book is added to the library
-displayBooks();
-removeBookFromLibrary("The Hobbit");
-displayBooks();
