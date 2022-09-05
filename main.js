@@ -24,13 +24,25 @@ function createCard(book, dataID) {
   card.setAttribute("data-id", dataID);
 
   const title = document.createElement("div");
+  title.classList.add("title");
   title.textContent = book.title;
 
+  const authorGroup = document.createElement("div");
+  authorGroup.classList.add("author-group");
+
   const author = document.createElement("div");
+  author.classList.add("author");
   author.textContent = book.author;
 
+  const by = document.createElement("p");
+  by.textContent = "by";
+
+  authorGroup.appendChild(by);
+  authorGroup.appendChild(author);
+
   const pages = document.createElement("div");
-  pages.textContent = book.pages;
+  pages.classList.add("pages");
+  pages.textContent = book.pages + " pages";
 
   const isReadToggle = document.createElement("button");
   isReadToggle.addEventListener("click", onReadToggleButton);
@@ -39,11 +51,15 @@ function createCard(book, dataID) {
     : "I have not read this";
 
   const removeButton = document.createElement("button");
-  removeButton.textContent = "Remove";
+  const closeImg = document.createElement("img");
+  closeImg.src = "icons/close-circle-outline.svg";
+  closeImg.alt = "remove";
+  removeButton.appendChild(closeImg);
+  removeButton.classList.add("remove-button");
   removeButton.addEventListener("click", onRemoveButton);
 
   card.appendChild(title);
-  card.appendChild(author);
+  card.appendChild(authorGroup);
   card.appendChild(pages);
   card.appendChild(isReadToggle);
   card.appendChild(removeButton);

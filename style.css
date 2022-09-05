@@ -1,6 +1,18 @@
 body {
     margin: 0;
     background-color: cornsilk;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+#new-button {
+    background-color: rgb(65, 65, 151);
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    border-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cards {
@@ -12,19 +24,58 @@ body {
 }
 
 .card {
-    border-radius: 1em;
+    border-radius: .5em;
     box-shadow: .2em .2em .2em rgba(0, 0, 0, 0.5);
+}
+
+#new-card {
+    background-color: rgb(214, 213, 213);
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
 }
 
 .book {
     background-color: rgba(255, 0, 0, 0.137);
-    /* flex-direction: column;
+    display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
-    align-items: center; */
+    align-items: center;
+    position: relative;
+}
+
+.title {
+    font-size: x-large;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+    max-width: 90%;
+}
+
+.author {
+    font-size: large;
+    font-weight: bold;
+}
+
+p {
+    margin: 0;
+}
+
+.author-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-button {
+    background-color: hsla(0, 0%, 0%, 0.0);
+    position: absolute;
+    top: 0em;
+    right: 0em;
+    width: 2.5em;
+    padding: 0;
+    border: none;
 }
 
 .book.read {
