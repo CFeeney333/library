@@ -22,3 +22,19 @@ body {
 .card.read {
     background-color: rgba(0, 128, 0, 0.171);
 }
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 166, 0, 0.308);
+    position: absolute;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.hidden {
+    display: none;
+}

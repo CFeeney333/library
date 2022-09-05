@@ -3,6 +3,14 @@ const myLibrary = {};
 
 // global dom references
 const cards = document.querySelector(".cards");
+const form = document.querySelector(".form");
+const newButton = document.querySelector("#new-button");
+const cancelButton = document.querySelector("#cancel-button");
+const addButton = document.querySelector("#add-button");
+
+// add event listeners
+newButton.addEventListener("click", onNewButton);
+cancelButton.addEventListener("click", onCancelButton);
 
 // dynamic html creation
 function createCard(book) {
@@ -39,6 +47,17 @@ function createCard(book) {
 }
 
 // event callbacks
+function onNewButton(event) {
+  if (form.classList.contains("hidden")) {
+    form.classList.remove("hidden");
+  }
+}
+
+function onCancelButton(event) {
+  if (!form.classList.contains("hidden")) {
+    form.classList.add("hidden");
+  }
+}
 
 // global functions
 function addBookToLibrary(book) {
