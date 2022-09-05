@@ -17,6 +17,9 @@ addButton.addEventListener("click", onAddButton);
 function createCard(book, dataID) {
   const card = document.createElement("div");
   card.classList.add("card");
+  if (book.isRead) {
+    card.classList.add("read");
+  }
   card.setAttribute("data-id", dataID);
 
   const title = document.createElement("div");
@@ -30,13 +33,11 @@ function createCard(book, dataID) {
 
   const isReadToggle = document.createElement("button");
   isReadToggle.addEventListener("click", onReadToggleButton);
-  isReadToggle.classList.add("is-read-toggle");
   isReadToggle.textContent = book.isRead
     ? "I have read this"
     : "I have not read this";
 
   const removeButton = document.createElement("button");
-  removeButton.classList.add("remove-button");
   removeButton.textContent = "Remove";
   removeButton.addEventListener("click", onRemoveButton);
 
@@ -75,7 +76,12 @@ function onAddButton(event) {
   displayBooks();
 }
 
-function onReadToggleButton(event) {}
+function onReadToggleButton(event) {
+  const parent = event.target.parentNode;
+  const book = myLibrary[parent.getAttribute("data-id")];
+  book.toggleReadStatus();
+  displayBooks();
+}
 
 function onRemoveButton(event) {
   const parent = event.target.parentNode;
@@ -128,8 +134,12 @@ Book.prototype.info = function () {
   }`;
 };
 
-Book.prototype.changeReadStatus = function (isRead) {
-  this.isRead = isRead;
+Book.prototype.toggleReadStatus = function () {
+  if (this.isRead) {
+    this.isRead = false;
+  } else {
+    this.isRead = true;
+  }
 };
 
 // const theHobbit = new Book("The Hobbit", "J R R Tolkien", 256, true);
