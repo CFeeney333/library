@@ -77,7 +77,11 @@ function onAddButton(event) {
 
 function onReadToggleButton(event) {}
 
-function onRemoveButton(event) {}
+function onRemoveButton(event) {
+  const parent = event.target.parentNode;
+  removeBookFromLibrary(parent.getAttribute("data-id"));
+  displayBooks();
+}
 
 // global functions
 function makeHidden(elem) {
