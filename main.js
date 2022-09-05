@@ -17,6 +17,7 @@ addButton.addEventListener("click", onAddButton);
 function createCard(book, dataID) {
   const card = document.createElement("div");
   card.classList.add("card");
+  card.classList.add("book");
   if (book.isRead) {
     card.classList.add("read");
   }
@@ -111,7 +112,8 @@ function removeBookFromLibrary(index) {
 }
 
 function displayBooks() {
-  while (cards.firstChild) {
+  while (cards.firstChild && cards.lastChild.id !== "new-card") {
+    // we don't want to remove the card that adds new cards
     cards.removeChild(cards.lastChild);
   }
 
