@@ -1,5 +1,5 @@
 // global variables
-const myLibrary = {};
+const myLibrary = [];
 
 // global dom references
 const cards = document.querySelector(".cards");
@@ -11,11 +11,13 @@ const addButton = document.querySelector("#add-button");
 // add event listeners
 newButton.addEventListener("click", onNewButton);
 cancelButton.addEventListener("click", onCancelButton);
+addButton.addEventListener("click", onAddButton);
 
 // dynamic html creation
-function createCard(book) {
+function createCard(book, dataID) {
   const card = document.createElement("div");
   card.classList.add("card");
+  card.setAttribute("data-id", dataID);
 
   const title = document.createElement("div");
   title.textContent = book.title;
@@ -48,38 +50,64 @@ function createCard(book) {
 
 // event callbacks
 function onNewButton(event) {
-  if (form.classList.contains("hidden")) {
-    form.classList.remove("hidden");
-  }
+  makeVisible(form);
 }
 
 function onCancelButton(event) {
-  if (!form.classList.contains("hidden")) {
-    form.classList.add("hidden");
-  }
+  makeHidden(form);
 }
+
+function onAddButton(event) {
+  const title = document.querySelector("#title");
+  const author = document.querySelector("#author");
+  const pages = document.querySelector("#pages");
+  const isRead = document.querySelector("#is-read");
+
+  const book = new Book(title.value, author.value, pages.value, isRead.checked);
+  addBookToLibrary(book);
+
+  title.value = "";
+  author.value = "";
+  pages.value = "";
+  isRead.checked = false;
+
+  makeHidden(form);
+  displayBooks();
+}
+
+function onReadToggleButton(event) {}
+
+function onRemoveButton(event) {}
 
 // global functions
-function addBookToLibrary(book) {
-  if (!Object.keys(myLibrary).includes(book.title)) {
-    myLibrary[book.title] = book;
-    cards.appendChild(createCard(book));
-  } else {
-    console.log("Library already contains book " + book.title);
+function makeHidden(elem) {
+  if (!elem.classList.contains("hidden")) {
+    elem.classList.add("hidden");
   }
 }
 
-function removeBookFromLibrary(title) {
-  if (Object.keys(myLibrary).includes(title)) {
-    delete myLibrary[title];
-  } else {
-    console.log("Library does not contain book " + title);
+function makeVisible(elem) {
+  if (elem.classList.contains("hidden")) {
+    elem.classList.remove("hidden");
   }
+}
+
+function addBookToLibrary(book) {
+  myLibrary.push(book);
+}
+
+function removeBookFromLibrary(index) {
+  myLibrary.splice(index, 1);
 }
 
 function displayBooks() {
-  for (let book of Object.values(myLibrary)) {
-    console.log(book.info());
+  while (cards.firstChild) {
+    cards.removeChild(cards.lastChild);
+  }
+
+  for (let i = 0; i < myLibrary.length; i++) {
+    const book = myLibrary[i];
+    cards.appendChild(createCard(book, i));
   }
 }
 
@@ -100,5 +128,5 @@ Book.prototype.changeReadStatus = function (isRead) {
   this.isRead = isRead;
 };
 
-const theHobbit = new Book("The Hobbit", "J R R Tolkien", 256, true);
-addBookToLibrary(theHobbit);
+// const theHobbit = new Book("The Hobbit", "J R R Tolkien", 256, true);
+// addBookToLibrary(theHobbit);
