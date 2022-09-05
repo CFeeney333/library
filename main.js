@@ -1,10 +1,50 @@
 // global variables
 const myLibrary = {};
 
+// global dom references
+const cards = document.querySelector(".cards");
+
+// dynamic html creation
+function createCard(book) {
+  const card = document.createElement("div");
+  card.classList.add("card");
+
+  const title = document.createElement("div");
+  title.textContent = book.title;
+
+  const author = document.createElement("div");
+  author.textContent = book.author;
+
+  const pages = document.createElement("div");
+  pages.textContent = book.pages;
+
+  const isReadToggle = document.createElement("button");
+  isReadToggle.addEventListener("click", onReadToggleButton);
+  isReadToggle.classList.add("is-read-toggle");
+  isReadToggle.textContent = book.isRead
+    ? "I have read this"
+    : "I have not read this";
+
+  const removeButton = document.createElement("button");
+  removeButton.classList.add("remove-button");
+  removeButton.textContent = "Remove";
+  removeButton.addEventListener("click", onRemoveButton);
+
+  card.appendChild(title);
+  card.appendChild(author);
+  card.appendChild(pages);
+  card.appendChild(isReadToggle);
+  card.appendChild(removeButton);
+  return card;
+}
+
+// event callbacks
+
 // global functions
 function addBookToLibrary(book) {
   if (!Object.keys(myLibrary).includes(book.title)) {
     myLibrary[book.title] = book;
+    cards.appendChild(createCard(book));
   } else {
     console.log("Library already contains book " + book.title);
   }
@@ -40,3 +80,6 @@ Book.prototype.info = function () {
 Book.prototype.changeReadStatus = function (isRead) {
   this.isRead = isRead;
 };
+
+const theHobbit = new Book("The Hobbit", "J R R Tolkien", 256, true);
+addBookToLibrary(theHobbit);
