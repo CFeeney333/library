@@ -46,6 +46,7 @@ function createCard(book, dataID) {
 
   const isReadToggle = document.createElement("button");
   isReadToggle.addEventListener("click", onReadToggleButton);
+  isReadToggle.classList.add("is-read-toggle");
   isReadToggle.textContent = book.isRead
     ? "I have read this"
     : "I have not read this";
@@ -80,6 +81,15 @@ function onAddButton(event) {
   const author = document.querySelector("#author");
   const pages = document.querySelector("#pages");
   const isRead = document.querySelector("#is-read");
+
+  if (title.value.length === 0 || author.value.length === 0) {
+    alert("Please give both title and author");
+    return;
+  }
+
+  if (pages.value.length === 0) {
+    pages.value = "0";
+  }
 
   const book = new Book(title.value, author.value, pages.value, isRead.checked);
   addBookToLibrary(book);
