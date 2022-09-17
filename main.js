@@ -68,15 +68,15 @@ function createCard(book, dataID) {
 }
 
 // event callbacks
-function onNewButton(event) {
+function onNewButton() {
   makeVisible(form);
 }
 
-function onCancelButton(event) {
+function onCancelButton() {
   makeHidden(form);
 }
 
-function onAddButton(event) {
+function onAddButton() {
   const title = document.querySelector("#title");
   const author = document.querySelector("#author");
   const pages = document.querySelector("#pages");
@@ -149,26 +149,15 @@ function displayBooks() {
   }
 }
 
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
-}
-
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${
-    this.isRead ? "read" : "not read yet"
-  }`;
-};
-
-Book.prototype.toggleReadStatus = function () {
-  if (this.isRead) {
-    this.isRead = false;
-  } else {
-    this.isRead = true;
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
   }
-};
 
-// const theHobbit = new Book("The Hobbit", "J R R Tolkien", 256, true);
-// addBookToLibrary(theHobbit);
+  toggleReadStatus() {
+    this.isRead ? this.isRead = false : this.isRead = true;
+  }
+}
